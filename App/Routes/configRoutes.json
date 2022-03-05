@@ -1,0 +1,26 @@
+{
+  "404": {
+    "route": "404",
+    "controller": "Controller",
+    "method": "notFound",
+    "loginIsRequired": false
+  },
+  "login": {
+    "route": "login",
+    "controller": "Login",
+    "method": "index",
+    "loginIsRequired": false
+  },
+  "logout": {
+    "route": "logout",
+    "controller": "Login",
+    "method": "logout",
+    "loginIsRequired": true
+  },
+  "home": {
+    "route": "",
+    "controller": "Controller",
+    "method": "home",
+    "loginIsRequired": true
+  }
+}
