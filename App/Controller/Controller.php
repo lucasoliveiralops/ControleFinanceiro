@@ -1,71 +1,67 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
-class Controller {
+class Controller
+{
 
-  protected $data, $output, $nameTemplate, $titlePage, $justMiddle = false, $model;
+  protected $data, $output, $nameTemplate;
+  protected $titlePage, $model, $header;
+  public $justMiddle = false;
 
-  public function __construct(){
+  public function __construct()
+  {
     $class = '\App\Model\\' . str_replace('App\Controller\\', '', get_class($this));
-    if(class_exists($class)){
+    if (class_exists($class)) {
       $this->model = new $class();
     }
   }
-  protected function getTemplateWithRightPath($templete){
+  protected function getTemplateWithRightPath($templete)
+  {
     return "View\\" . $templete . '.php';
   }
 
-  private function getTitlePage(){
-    if(empty($this->titlePage)){
+  public function getTitlePage()
+  {
+    if (empty($this->titlePage)) {
       return '';
     }
     return $this->titlePage . ' | ';
   }
 
-  public function header()
+  public function getOutput()
   {
+    return $this->output;
   }
 
-  public function home()
+  protected function appendJS($js)
   {
-    $this->titlePage = 'Home';
-    $this->nameTemplate = 'home/index';
-    $this->renderTemplete('home/index');
+    \App\Lib\HeaderAndFooter::getInstanse()->addJS($js);
   }
 
-  public function footer()
+  protected function appendCSS($css)
   {
-    echo 'eu sou um footer';
+    \App\Lib\HeaderAndFooter::getInstanse()->addStyle($css);
   }
-
-  public function notFound(){
-    $this->titlePage = '404';
-    $this->nameTemplate = 'home';
-    $this->renderTemplete('404');
-  }
-  
   public function renderTemplete($viewTemplete)
   {
     $template = $this->getTemplateWithRightPath($viewTemplete);
     if (!file_exists($template)) {
-        throw new \Exception('Error: Não foi possivel encontrar a view "' . $this->nameTemplate . '"!');
+      throw new \Exception('Error: Não foi possivel encontrar a view "' . $template . '"!');
     }
-    $this->data['titlePage'] = $this->getTitlePage();
-    if($this->justMiddle == false) {
-      $this->header();
+    $this->data['titlePage'] = \App\Lib\HeaderAndFooter::getInstanse()->getTitle();
+    if (is_array($this->data)) {
+      extract($this->data);
     }
     ob_start();
-    extract($this->data);
-    if($this->justMiddle == false) {
-      require($this->getTemplateWithRightPath('header'));
-    }
     require($template);
-    if($this->justMiddle == false) {
-      require($this->getTemplateWithRightPath('footer'));
-    }
-    $this->data = ob_get_contents();
-    $this->data = preg_replace("/\s\s+/", ' ', str_replace("\n", '', $this->data));
-    return $this->data;
+    $this->output = ob_get_clean();
+    $this->output = preg_replace("/\s\s+/", ' ', str_replace("\n", '', $this->output));
+    return $this->output;
+  }
+
+  protected function setTitle($title)
+  {
+    \App\Lib\HeaderAndFooter::getInstanse()->setTitle($title);
   }
 }

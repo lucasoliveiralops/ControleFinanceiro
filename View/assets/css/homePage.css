@@ -1,0 +1,103 @@
+.dashboard {
+    background: rgb(171 34 194);
+    height: 250px;
+    padding-top: 150px;
+    text-align: center;
+}
+
+.card {
+    padding: 15px 10px;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 15px -7px #000000;
+    box-shadow: 5px 5px 15px -7px #000000;
+}
+
+.card:hover {
+    filter: brightness(0.9);
+    transition: 350ms;
+}
+
+.main-home {
+    min-height: auto;
+}
+
+.actions {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    float: right;
+}
+
+table {
+    margin-top: 15px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#registerMovement .form-group {
+    margin-top: 10px;
+}
+
+.header-movement {
+    text-align: center;
+}
+
+.header-movement img {
+    width: 150px;
+    display: inline-block;
+}
+
+.header-movement h4 {
+    font-size: 25px;
+    margin-left: 25px;
+    display: inline-block;
+}
+
+.radio-moviment {
+    width: 300px;
+    border: solid;
+    margin-right: 15px;
+    display: inline-block;
+    text-align: center;
+}
+
+.radio-moviment label {
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.radio-moviment img {
+    height: 90px;
+}
+
+.label-block {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.radio-moviment input[type=radio] {
+    display: none;
+}
+
+.radio-moviment input[type=radio]:checked+label {
+    background: #f1f1f1;
+}
+
+.movementInstallments {
+    display: none;
+}
+
+.data {
+    margin-bottom: 50px;
+}
+
+@media (min-width: 992px) {
+    .modal-lg,
+    .modal-xl {
+        max-width: 700px!important;
+    }
+}
