@@ -8,8 +8,9 @@
         Cadastrar movimentação
       </button>
     </div>
-    <div class='data'>
-      <?php include 'View/home/listMovements.php' ?>
-    </div>
+    <div class='data-table'>
+      <div class="loading">
+        <img src="View/assets/images/loading.gif" />
+      </div>
 </main>
 <?php include 'View/home/registerMovementModal.php' ?>

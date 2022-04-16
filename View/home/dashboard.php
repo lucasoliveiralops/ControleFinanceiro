@@ -3,19 +3,21 @@
     <div class='col-lg-4'>
       <div class='card'>
         <h2>Gastos Totais:</h2>
-        <p>R$500,00 </p>
+        <div class='info gastos-totais'>
+          <div class="loading loading-small">
+            <img src="View/assets/images/loading.gif" />
+          </div>
+        </div>
       </div>
     </div>
     <div class='col-lg-4'>
       <div class='card'>
         <h2>Gastos na Semana:</h2>
-        <p>R$500,00 </p>
-      </div>
-    </div>
-    <div class='col-lg-4'>
-      <div class='card'>
-        <h2>Salário disponível:</h2>
-        <p>R$500,00 </p>
+        <div class="info gastos-semana">
+          <div class="loading loading-small">
+            <img src="View/assets/images/loading.gif" />
+          </div>
+        </div>
       </div>
     </div>
   </div>

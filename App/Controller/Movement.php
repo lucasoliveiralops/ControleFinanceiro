@@ -5,29 +5,45 @@ namespace App\Controller;
 use \App\Lib\{
   Alert,
   Date,
+  Json,
   Validations\ValidationsForm
 };
 
 class Movement extends Controller
 {
-  public function insertMovementFromForm(array $values)
+
+  public  $typeMovementsOutgoing = array(2, 4);
+
+  public function insertMovementFromForm()
   {
+    $values = $_POST;
     try {
       $this->validateInsertFrom($values);
       if (isset($values['Parcelas']) && $values['Parcelas'] > 1) {
-        return $this->insertMovementWithInstallmentsForm($values);
+        echo Json::encode(array(
+          'type' => 'success',
+          'message' => $this->insertMovementWithInstallmentsForm($values)
+        ));
+        return;
       }
-      return $this->insertSimpleMovement($values);
+      echo Json::encode(array(
+        'type' => 'success',
+        'message' => $this->insertSimpleMovement($values)
+      ));
     } catch (\Exception $e) {
-      return Alert::alert('error', $e->getMessage());
+      echo Json::encode(array(
+        'type' => 'error',
+        'message' => $e->getMessage()
+      ));
     }
   }
 
   private function insertSimpleMovement(array $movement)
   {
     $this->model->insert($movement);
-    return Alert::alert('success', 'Movimentação inserida com sucesso!');
+    return 'Movimentação inserida com sucesso!';
   }
+
   private function insertMovementWithInstallmentsForm(array $movement)
   {
     $idMainMovement = $this->model->insert($movement);
@@ -64,8 +80,6 @@ class Movement extends Controller
 
   public function getAllMovementsOfThisMonth()
   {
-    $firstDate = Date::firstDayOfTheMonth();
-    $lastDate = Date::lastDayOfTheMonth();
-    return $this->model->getAllBetweenDate($firstDate, $lastDate);
+    return $this->model->getAllBetweenDate(Date::firstDayOfTheMonth(), Date::lastDayOfTheMonth());
   }
 }

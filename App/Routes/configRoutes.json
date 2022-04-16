@@ -3,24 +3,28 @@
         "route": "404",
         "controller": "Structure",
         "method": "notFound",
-        "loginIsRequired": false
+        "loginIsRequired": false,
+        "isRouteAjax": false
     },
     "login": {
         "route": "login",
         "controller": "Login",
         "method": "index",
-        "loginIsRequired": false
+        "loginIsRequired": false,
+        "isRouteAjax": false
     },
     "logout": {
         "route": "logout",
         "controller": "Login",
         "method": "logout",
-        "loginIsRequired": true
+        "loginIsRequired": true,
+        "isRouteAjax": false
     },
     "home": {
         "route": "",
         "controller": "Home",
         "method": "index",
-        "loginIsRequired": true
+        "loginIsRequired": true,
+        "isRouteAjax": false
     }
 }

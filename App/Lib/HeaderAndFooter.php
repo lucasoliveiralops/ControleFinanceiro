@@ -38,11 +38,12 @@ class HeaderAndFooter
     if ($local == 'header') {
     }
     if ($local == 'footer') {
-      $out .= '<script src="view/assets/js/jquery-1-11.js"></script>';
-      $out .= '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>';
+      $out .= '<script src="view/assets/js/plugins/jquery-1-11.js"></script>';
+      $out .= '<script src="view/assets/js/plugins/bootstrap.js"></script>';
       $out .= '<script src="view/assets/js/main.js"></script>';
-      $out .= '<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>';
-      $out .= '<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>';
+      $out .= '<script src="view/assets/js/plugins/sweetalert2.js"></script>';
+      $out .= '<script src="view/assets/js/plugins/select2.js"></script>';
+      $out .= '<script src="view/assets/js/plugins/dataTable.js"></script>';
       if (!empty($this->moduleJS)) {
         foreach ($this->moduleJS as $js) {
           $out .= $js;
@@ -59,6 +60,7 @@ class HeaderAndFooter
     $out .= '<link rel="stylesheet" href="view/assets/css/main.css">';
     $out .= '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">    ';
     $out .= '<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />';
+    $out .= '<link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />';
     return $out;
   }
   public function addStyle($link, $external = false)

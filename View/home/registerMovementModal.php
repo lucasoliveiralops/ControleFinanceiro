@@ -13,22 +13,22 @@
       <div class="modal-body">
         <form method="post" id="formRegisterMovement" action="">
           <div class="form-group">
-            <label for="Nome">Nome da movimentação:</label>
-            <input type="text" class="form-control" name="Nome" id="Nome" placeholder="Exemplo: Sacolão Epa">
+            <label for="Nome">Nome da movimentação*:</label>
+            <input type="text" class="form-control canClearInput" name="Nome" id="Nome" placeholder="Exemplo: Sacolão Epa" required>
           </div>
           <div class="form-group">
-            <label for="Valor">Valor da movimentação:</label>
+            <label for="Valor">Valor da movimentação*:</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">R$</span>
               </div>
-              <input type="number" min="1" step="any" name="Valor" id="Valor" class="form-control" placeholder="Exemplo: 25,00">
+              <input type="number" min="1" step="any" name="Valor" id="Valor" class="form-control canClearInput" placeholder="Exemplo: 25,00" required>
             </div>
           </div>
           <div class="form-group">
             <label for="Data">Data da movimentação:</label>
             <div class="input-group mb-3">
-              <input type="date" name="Data" id="Data" class="form-control" value="<?= \App\Lib\Date::todayDateForInput() ?>">
+              <input type="date" name="Data" id="Data" class="form-control" value="<?= \App\Lib\Date::todayDateForInput() ?>" required>
             </div>
           </div>
           <div class="form-group">
@@ -39,38 +39,39 @@
           </div>
           <div class="form-group movementInstallments">
             <label for="Parcelas">Número de parcelas:</label>
-            <input type="number" min="1" max="24" class="form-control" name="Parcelas" id="Parcelas">
+            <input type="number" min="1" max="24" class="form-control canClearInput" name="Parcelas" id="Parcelas">
             <small class="form-text text-muted">
               Você só irá preencher este campo caso a sua movimentação seja dividido em parcelas, o sistema irá pegar o total da movimentação e dividir pelo número de parcelas.
             </small>
           </div>
           <div class="form-group">
+            <label for="Categoria" class="label-block">Categoria*:</label>
+            <select name="Categoria" id="Categoria" class="form-control js-categorys canClearInput" style="width: 100%" required>
+              <option value="">Selecione um tipo de gasto...</option>
+              <?php foreach ($categories as $value) { ?>
+                <optgroup label="<?= $value['nameTypeCategory'] ?>">
+                  <?php foreach ($value['categories'] as $categorie) { ?>
+                    <option value="<?= $categorie->id ?>">
+                      <?= $categorie->name ?></option>
+                  <?php } ?>
+                </optgroup>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
             <p class="label-block">Tipo do gasto:</p>
             <div class="radio-moviment">
-              <input type="radio" id="loss" name="typeMoviment" value="2">
+              <input class="required canClearInput" type="radio" id="loss" name="typeMoviment" value="2" required>
               <label for="loss"><img src="view/assets/images/icon-loss.png"></label>
             </div>
             <div class="radio-moviment">
-              <input type="radio" id="profit" name="typeMoviment" value="1">
+              <input type="radio" id="profit" name="typeMoviment" value="1" class="canClearInput">
               <label for="profit"><img src="view/assets/images/icon-profit.png"></label>
-            </div>
-            <div class="form-group">
-              <label for="Categoria" class="label-block">Categoria:</label>
-              <select name="Categoria" id="Categoria" class="form-control js-categorys" style="width: 100%">
-                <option>Selecione um tipo de gasto...</option>
-                <?php foreach ($categories as $value) { ?>
-                  <optgroup label="<?= $value['nameTypeCategory'] ?>">
-                    <?php foreach ($value['categories'] as $categorie) { ?>
-                      <option value="<?= $categorie->id ?>">
-                        <?= $categorie->name ?></option>
-                    <?php } ?>
-                  </optgroup>
-                <?php } ?>
-              </select>
             </div>
           </div>
           <button type="submit" class="btn btn-success">Cadastrar</button>
         </form>
+        <div class="message"></div>
       </div>
     </div>
   </div>

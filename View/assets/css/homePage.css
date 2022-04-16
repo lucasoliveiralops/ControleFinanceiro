@@ -18,13 +18,19 @@
 }
 
 .main-home {
-    min-height: auto;
+    min-height: 547px;
 }
 
 .actions {
     margin-top: 60px;
     margin-bottom: 60px;
     float: right;
+}
+
+.card .info {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0;
 }
 
 table {

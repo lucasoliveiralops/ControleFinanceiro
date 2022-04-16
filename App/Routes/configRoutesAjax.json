@@ -1,0 +1,33 @@
+{
+    "insertMovementAjax": {
+        "route": "ajaxInsertMovement",
+        "controller": "Movement",
+        "method": "insertMovementFromForm",
+        "loginIsRequired": true,
+        "isRouteAjax": true
+    },
+
+    "genereteTableMovementsOfThisMonthAjax": {
+        "route": "genereteTableMovementsOfThisMonth",
+        "controller": "Home",
+        "method": "genereteTableMovementsOfThisMonthAjax",
+        "loginIsRequired": true,
+        "isRouteAjax": true
+    },
+
+
+    "getAllOutgoingMovementsOfThisMonthAjax": {
+        "route": "getAllOutgoingMovementsOfThisMonthAjax",
+        "controller": "Home",
+        "method": "getAllOutgoingMovementsOfThisMonthAjax",
+        "loginIsRequired": true,
+        "isRouteAjax": true
+    },
+    "getAllOutgoingMovementsOfThisWeekAjax": {
+        "route": "getAllOutgoingMovementsOfThisWeekAjax",
+        "controller": "Home",
+        "method": "getAllOutgoingMovementsOfThisWeekAjax",
+        "loginIsRequired": true,
+        "isRouteAjax": true
+    }
+}

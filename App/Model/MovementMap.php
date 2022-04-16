@@ -16,6 +16,39 @@ class MovementMap
     $this->appendMap('fk_id_categoria_movimentacao', 'idCategoryMovement');
     $this->appendMap('id_pai_movimentacao', 'idFatherMovement');
     $this->appendMap('get_function_getCategoryMovement', 'getCategoryMovement');
+    $this->appendMap('get_function_getNameStatusMovement', 'getNameStatusMovement');
+    $this->appendMap('get_function_getNameTypeMovement', 'getTypeMovement');
+    $this->appendMap('get_function_isDespesa', 'isDespesa');
+    $this->appendMap('get_function_isDespesaFixa', 'isDespesaFixa');
+    $this->appendMap('get_function_isGanho', 'isGanho');
+    $this->appendMap('get_function_isGanhoFixo', 'isGanhoFixo');
+  }
+  private function isDespesa()
+  {
+    return $this->idTypeMovement == 2;
+  }
+
+  private function isDespesaFixa()
+  {
+    return $this->idTypeMovement == 4;
+  }
+
+  private function isGanho()
+  {
+    return $this->idTypeMovement == 1;
+  }
+
+  private function isGanhoFixo()
+  {
+    return $this->idTypeMovement == 3;
+  }
+
+  private function getTypeMovement()
+  {
+    if ($this->isGanho || $this->isGanhoFixo) {
+      return 'Ganhos';
+    }
+    return 'Despesas';
   }
 
   private function getCategoryMovement()
@@ -28,8 +61,8 @@ class MovementMap
   private function getNameStatusMovement()
   {
     if ($this->status == 1) {
-      return 'Aberto';
+      return 'Pago';
     }
-    return 'Pago';
+    return 'Aberto';
   }
 }

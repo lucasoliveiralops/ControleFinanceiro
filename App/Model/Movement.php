@@ -5,6 +5,7 @@ namespace App\Model;
 class Movement
 {
   use Model;
+
   public function getById($id)
   {
     $db = $this->toConnection;
@@ -25,6 +26,20 @@ class Movement
     $movements = $db->get('movimentacao');
     if (!empty($movements)) {
       return $this->transformInList($movements);
+    }
+  }
+
+  public function getSumValuesByTypeTransactionAndBetwennDate($startDate, $endDate, array $typeTransaction)
+  {
+    $db = $this->toConnection;
+    $startDate = $db->escape($startDate);
+    $endDate = $db->escape($endDate);
+    $typeTransaction = implode(',', $typeTransaction);
+    $db->where("date_movimentacao  BETWEEN '$startDate' AND '$endDate'");
+    $db->where("fk_id_tipo_movimentacao  IN('$typeTransaction')");
+    $movements = $db->getOne("movimentacao", "sum(valor_movimentacao) as sum");
+    if (!empty($movements)) {
+      return $movements['sum'];
     }
   }
 

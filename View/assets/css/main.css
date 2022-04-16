@@ -41,6 +41,7 @@ tr:nth-child(even) {
 }
 
 label.error {
+    width: 100%;
     color: red;
     font-weight: 500;
 }
@@ -101,4 +102,16 @@ main {
 
 tr:nth-child(even) {
     background-color: #ffffff;
+}
+
+.loading {
+    width: 100%;
+}
+
+.loading img {
+    width: 50%;
+}
+
+.loading-small img {
+    width: 20%;
 }

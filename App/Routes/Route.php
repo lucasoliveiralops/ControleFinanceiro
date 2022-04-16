@@ -4,15 +4,17 @@ namespace App\Routes;
 
 class Route
 {
-	private $routes;
+	private $routes = array();
 	private $routeController =  "App\\Controller\\";
 	private $routeConfig = "App\\Routes\\configRoutes.json";
+	private $routeConfigAjax = "App\\Routes\\configRoutesAjax.json";
 	private $urlBase;
 
 	public function __construct($urlBase)
 	{
 		$this->setUrl($urlBase);
 		$this->initRoutes();
+		$this->initRoutesAjax();
 		$this->run($this->getUrl());
 	}
 	public function getRoutes()
@@ -31,14 +33,24 @@ class Route
 
 	private function setRoutes(array $routes)
 	{
-		$this->routes = $routes;
+		$this->routes = array_merge($this->routes, $routes);
 	}
 
 	private function initRoutes()
 	{
 		if (file_exists($this->routeConfig)) {
 			$routes = file_get_contents($this->routeConfig);
-			$routes = \App\Lib\Util::jsonDecode($routes);
+			$routes = \App\Lib\Json::decode($routes);
+		}
+		$this->setRoutes($routes);
+	}
+
+
+	private function initRoutesAjax()
+	{
+		if (file_exists($this->routeConfigAjax)) {
+			$routes = file_get_contents($this->routeConfigAjax);
+			$routes = \App\Lib\Json::decode($routes);
 		}
 		$this->setRoutes($routes);
 	}
@@ -62,15 +74,17 @@ class Route
 				$controller = new $class;
 				$controller->$method();
 				$content = $controller->getOutput();
-				if ($controller->justMiddle == false) {
-					$structure = new \App\Controller\Structure();
-					$structure->headerPage();
-					$content =  $structure->getOutput() . 	$content;
-				}
-				if ($controller->justMiddle == false) {
-					$structure = new \App\Controller\Structure();
-					$structure->footerPage();
-					$content .=  $structure->getOutput();
+				if (isset($route['isRouteAjax']) && !$route['isRouteAjax']) {
+					if ($controller->justMiddle == false) {
+						$structure = new \App\Controller\Structure();
+						$structure->headerPage();
+						$content =  $structure->getOutput() . 	$content;
+					}
+					if ($controller->justMiddle == false) {
+						$structure = new \App\Controller\Structure();
+						$structure->footerPage();
+						$content .=  $structure->getOutput();
+					}
 				}
 				echo $content;
 				return;

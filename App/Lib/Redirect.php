@@ -1,10 +1,12 @@
-<?php 
+<?php
 
 namespace App\Lib;
-class Redirect {
+
+class Redirect
+{
   static function internalRedirect($url)
   {
-    header('Location: ' . $url);
-		exit();
+    header('Location: ' . URL_BASE . $url);
+    exit();
   }
 }
